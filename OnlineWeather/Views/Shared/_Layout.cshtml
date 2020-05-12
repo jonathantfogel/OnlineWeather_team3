@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Weather</title>
+     @Styles.Render("~/Content/Common/Stylesheets/Main.css")
+     @Styles.Render("~/Content/Common/Stylesheets/Header.css")
+    <!--Scripts.Render("~/bundles/modernizr")-->
+</head>
+<body>
+    <header id="main-header">
+        <div id="main-header-content">
+            <div id="main-header-content-logo_container">
+                <img id="main-header-content-logo_img" src="~/Content/Common/Images/logo_OnlineWeather.png" />
+            </div>
+        </div>
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
