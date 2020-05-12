@@ -2,3 +2,12 @@
     ViewBag.Title = "Home Page";
 }
 
+<div id="index-view">
+    <section id="weather_forecast">
+        <div id="weather_forecast-background"></div>
+    </section>
+</div>
+
+@section styles {
+    @Styles.Render("/Content/Home/Stylesheets/WeatherForecast.css")
+}

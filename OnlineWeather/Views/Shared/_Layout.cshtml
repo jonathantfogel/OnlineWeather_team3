@@ -6,22 +6,20 @@
     <title>Online Weather</title>
      @Styles.Render("~/Content/Common/Stylesheets/Main.css")
      @Styles.Render("~/Content/Common/Stylesheets/Header.css")
+    @RenderSection("styles", required: false)
     <!--Scripts.Render("~/bundles/modernizr")-->
 </head>
 <body>
     <header id="main-header">
         <div id="main-header-content">
             <div id="main-header-content-logo_container">
-                <img id="main-header-content-logo_img" src="~/Content/Common/Images/logo_OnlineWeather.png" />
+                <a href="/"><img id="main-header-content-logo_img" src="~/Content/Common/Images/logo_OnlineWeather.png" /></a>
             </div>
         </div>
     </header>
-    <div class="container body-content">
+    <div id="view">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        
     </div>
 
     @RenderSection("scripts", required: false)

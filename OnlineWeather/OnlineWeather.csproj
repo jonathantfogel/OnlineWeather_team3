@@ -134,6 +134,8 @@
     <Content Include="Content\Common\Images\logo_OnlineWeather.png" />
     <Content Include="Content\Common\Stylesheets\Header.css" />
     <Content Include="Content\Common\Stylesheets\Main.css" />
+    <Content Include="Content\Home\Images\karlskrona_background.jpg" />
+    <Content Include="Content\Home\Stylesheets\WeatherForecast.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
