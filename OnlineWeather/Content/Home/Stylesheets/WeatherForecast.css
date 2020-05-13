@@ -1,6 +1,9 @@
 ﻿#index-view {
     display: grid;
-    grid-template-areas: "forecastView forecastView forecastView forecastView" ". futureForecastView futureForecastView . " ". graphFilter graphView . ";
+    grid-template-areas: 
+        "forecastView forecastView forecastView forecastView" 
+        ". futureForecastView futureForecastView . " 
+        ". graphFilter graphView . ";
     grid-template-rows: 400px 220px calc(100vh - 100px);
     grid-template-columns: 30px 300px calc(100% - 420px) 30px;
     grid-row-gap: 50px;
@@ -15,15 +18,15 @@
     height: inherit;
     width: inherit;
     font-family: Arial;
-
     display: grid;
-    grid-template-areas: "temp visual";
-    grid-template-columns: repeat(2, min-content);
-    grid-auto-rows: min-content;
+    grid-template-areas: ". . ." ". . ." "temp visual ." "forecastTimestamp forecastTimestamp forecastTimestamp" "forecastMore forecastMore forecastMore";
+    grid-template-columns: repeat(2, min-content) auto;
+    grid-auto-rows: 40px 20px min-content 20px 40px;
     padding: 0 50px;
     align-content: center;
     align-items: center;
     grid-column-gap: 40px;
+    grid-row-gap: 20px;
 }
 #weather_forecast-background {
     position: absolute;
@@ -51,10 +54,21 @@
     grid-area: visual;
 }
     #weather_forecast-visual svg {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         fill: #fff;
     }
+    #weather_forecast-visual p {
+        margin: 0;
+        text-align: center;
+        white-space: nowrap;
+        font-size: 18px;
+        color: #fff;
+    }
+#weather_forecast-time_updated {
+    grid-area: forecastTimestamp;
+    color: rgb(180,180,180);
+}
 #weather_forecast-city {
     position: absolute;
     top: 0;
@@ -63,6 +77,30 @@
     font-size: 1.2em;
     line-height: 1.2em;
     color: #fff;
+}
+
+#weather_forecast-info {
+    grid-area: forecastMore;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.weather_forecast-info-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.8em;
+    color: #fff;
+    margin-right: 20px;
+}
+.weather_forecast-info-item div span {
+    margin-left: 5px;
+}
+.weather_forecast-info-item svg {
+    width: 17px;
+    height: 17px;
+    fill: #fff;
+    margin-right: 7px;
 }
 /*
     Future forecast
@@ -96,29 +134,61 @@
     flex-direction: row;
     overflow-x: auto;
 }
+    #weather_forecast-future-content_wrap::-webkit-scrollbar {
+        height: 5px;
+    }
+    #weather_forecast-future-content_wrap::-webkit-scrollbar-track {
+        background: transparent;
+        margin: 0 20px;
+    }
+    #weather_forecast-future-content_wrap::-webkit-scrollbar-thumb {
+        background: rgb(180,180,180);
+        border-radius: 3px;
+    }
+    #weather_forecast-future-content_wrap::-webkit-scrollbar-thumb:hover {
+        background: rgb(150,150,150);
+    }
     #weather_forecast-future-content p {
         position: relative;
         margin: 20px;
     }
+
 .weather_forecast-future-content-item {
     box-sizing: border-box;
-    width: 190px;
-    height: inherit;
+    min-width: 180px;
+    height: 100%;
     padding: 15px;
     font-family: Arial;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
     .weather_forecast-future-content-item:hover {
         background: rgb(0, 148, 255);
     }
+.weather_forecast-future-content-item-timestamp {
+    font-size: 17px;
+    color: rgb(120,120,120);
+    margin-bottom: 20px;
+    margin-top: -20px;
+}
+.weather_forecast-future-content-item-description {
+    margin-top: 5px;
+    font-size: 15px;
+    color: rgb(60,60,60);
+}
 .weather_forecast-future-content-item-temp {
-    font-size: 18px;
+    font-size: 21px;
+    font-weight: 600;
+    margin-top: 10px;
 }
     .weather_forecast-future-content-item:hover div {
         color: #fff;
     }
 .weather_forecast-future-content-item-visual {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
 }
     .weather_forecast-future-content-item-visual svg {
         fill: rgb(60,60,60);
