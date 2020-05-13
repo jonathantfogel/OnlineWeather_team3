@@ -1,7 +1,7 @@
 ﻿#index-view {
     display: grid;
-    grid-template-areas: "forecastView forecastView forecastView forecastView" ". graphFilter graphView . ";
-    grid-template-rows: 400px calc(100vh - 100px);
+    grid-template-areas: "forecastView forecastView forecastView forecastView" ". futureForecastView futureForecastView . " ". graphFilter graphView . ";
+    grid-template-rows: 400px 220px calc(100vh - 100px);
     grid-template-columns: 30px 300px calc(100% - 420px) 30px;
     grid-row-gap: 50px;
     grid-column-gap: 20px;
@@ -43,7 +43,7 @@
     margin-bottom: -0.25em;
     margin-left: -0.05em;
 }
-    #weather_forecast-temp span{
+    #weather_forecast-temp span#weather_forecast-temp-degC {
         color: rgb(210,210,210);
         font-size: 0.4em;
     }
@@ -64,6 +64,68 @@
     line-height: 1.2em;
     color: #fff;
 }
+/*
+    Future forecast
+*/
+#weather_forecast-future {
+    grid-area: futureForecastView;
+}
+#weather_forecast-future-title {
+    margin-bottom: 10px;
+    height: 20px;
+    line-height: 20px;
+    font-family: Arial;
+    font-size: 18px;
+    color: rgb(0, 148, 255);
+}
+#weather_forecast-future-content {
+    position: relative;
+    height: 190px;
+    width: 100%;
+    border-radius: 15px;
+    background: rgb(245,245,245);
+    overflow: hidden;
+}
+#weather_forecast-future-content_wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+}
+    #weather_forecast-future-content p {
+        position: relative;
+        margin: 20px;
+    }
+.weather_forecast-future-content-item {
+    box-sizing: border-box;
+    width: 190px;
+    height: inherit;
+    padding: 15px;
+    font-family: Arial;
+}
+    .weather_forecast-future-content-item:hover {
+        background: rgb(0, 148, 255);
+    }
+.weather_forecast-future-content-item-temp {
+    font-size: 18px;
+}
+    .weather_forecast-future-content-item:hover div {
+        color: #fff;
+    }
+.weather_forecast-future-content-item-visual {
+    width: 50px;
+    height: 50px;
+}
+    .weather_forecast-future-content-item-visual svg {
+        fill: rgb(60,60,60);
+    }
+        .weather_forecast-future-content-item:hover .weather_forecast-future-content-item-visual svg {
+            fill: #fff;
+        }
 /*
     Graph - Filter
 */

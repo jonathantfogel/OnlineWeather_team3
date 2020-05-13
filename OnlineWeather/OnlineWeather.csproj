@@ -127,6 +127,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Api\SMHI\smhi_api.js" />
     <Content Include="Content\Bootstrap\bootstrap-theme.css" />
     <Content Include="Content\Bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\Bootstrap\bootstrap.css" />

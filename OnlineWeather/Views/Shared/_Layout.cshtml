@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Weather</title>
-     @Styles.Render("~/Content/Common/Stylesheets/Main.css")
-     @Styles.Render("~/Content/Common/Stylesheets/Header.css")
+    @Styles.Render("~/Content/Common/Stylesheets/Main.css")
+    @Styles.Render("~/Content/Common/Stylesheets/Header.css")
     @RenderSection("styles", required: false)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--Scripts.Render("~/bundles/modernizr")-->
 </head>
 <body>
@@ -22,6 +23,7 @@
         
     </div>
 
+    @Scripts.Render("/Content/Api/SMHI/smhi_api.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
