@@ -1,0 +1,30 @@
+﻿form#graph-filter-form {
+    box-sizing: border-box;
+    padding: 20px;
+    font-family: 'Segoe UI';
+}
+
+#graph-filter-form label {
+    display: block;
+}
+#graph-filter-form label input[type=checkbox] {
+    float: left;
+    margin-right: 5px;
+}
+#graph-filter-form label p {
+    display: table;
+    margin: 0 0 10px;
+}
+
+#graph-filter-form input[type=submit] {
+    padding: 10px 20px;
+    background: rgb(0, 148, 255);
+    font-size: 15px;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#graph-filter-form input[type=submit]:hover {
+    background: rgb(73, 179, 255);
+}
