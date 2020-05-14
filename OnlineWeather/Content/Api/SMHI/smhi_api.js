@@ -85,8 +85,8 @@
     smhi.approvedTime = null;
     smhi.referenceTime = null;
 
-    smhi.latitude = "52.547483";
-    smhi.longitude = "27.348870";
+    smhi.latitude = "56.160820";
+    smhi.longitude = "15.586710";
 
     smhi.previousMarker = null;
     smhi.selectedParameter = null;
