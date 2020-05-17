@@ -1,9 +1,4 @@
 ﻿(function (smhi, $, undefined) {
-
-    /*
-     The API end point. This is the only hardcoded url.
-     All other urls are returned in responses.
-     */
     smhi.endPoint = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/{lon}/lat/{lat}/data.json";
 
     smhi.forecast = null;
