@@ -124,6 +124,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\WeatherData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +135,7 @@
     <Content Include="Content\Bootstrap\bootstrap.min.css" />
     <Content Include="Content\ChartJs\Chart.js" />
     <Content Include="Content\Common\Images\logo_OnlineWeather.png" />
+    <Content Include="Content\Common\Scripts\GetWeatherData.js" />
     <Content Include="Content\Common\Stylesheets\Header.css" />
     <Content Include="Content\Common\Stylesheets\Main.css" />
     <Content Include="Content\Home\Images\graph_example.jpg" />
@@ -225,7 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
