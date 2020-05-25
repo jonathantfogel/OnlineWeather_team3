@@ -17,8 +17,7 @@ namespace OnlineWeather.Controllers
         [HttpPost]
         public ActionResult RequestWeatherData(bool windspeed = false, bool temp = true, bool precipitation = false) 
         {
-            var result = WeatherData.Serialize(new WeatherData().Data);
-            return Json(result);
+            return Json(new WeatherData().Data);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace OnlineWeather.Models
 {
     public class WeatherData
     {
-        public DataTable Data { get; internal set; }
+        public List<WeatherItem> Data { get; internal set; }
         private string DataType { get; }
         private string DataAttribute { get; }
 
@@ -25,7 +25,7 @@ namespace OnlineWeather.Models
                 new KeyNotFoundException($"Weather attribute \"{dataType}\" not found.");
             }
             
-            this.Data = new DataTable();
+            //this.Data = new DataTable();
             var dc = new DataColumn[4]
             {
                 new DataColumn("Datum", typeof(string)),
@@ -33,25 +33,32 @@ namespace OnlineWeather.Models
                 new DataColumn(WeatherAttribute.Attributes[dataType], typeof(string)),
                 new DataColumn("Kvalitet", typeof(string))
             };
-            Data.Columns.AddRange(dc);
+            //Data.Columns.AddRange(dc);
 
             string csvData = File.ReadAllText($"{HttpContext.Current.Server.MapPath("~")}/Content/WeatherData/smhi-{dataType}.csv");
+
+            var test = new List<WeatherItem>();
 
             var rows = csvData.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             for (int rowidx = 1; rowidx < rows.Count(); rowidx++)
             {
                 if (!String.IsNullOrEmpty(rows[rowidx]))
                 {
-                    Data.Rows.Add();
+                    //Data.Rows.Add();
                     int i = 0;
 
-                    foreach (var cell in rows[rowidx].Split(';'))
+                    var cells = rows[rowidx].Split(';');
+
+                    test.Add(new WeatherItem(cells[0], cells[1], cells[2]));
+
+                    /*foreach (var cell in rows[rowidx].Split(';'))
                     {
                         Data.Rows[Data.Rows.Count - 1][i] = cell;
                         i++;
-                    }
+                    }*/
                 }
             }
+            Data = test;
         }
 
         public static string Serialize(DataTable dt)
@@ -73,6 +80,18 @@ namespace OnlineWeather.Models
         }
 
 
+    }
+
+    public class WeatherItem
+    {
+        public string Timestamp { get; }
+        public string Data { get; }
+
+        public WeatherItem(string date, string time, string data)
+        {
+            Timestamp = $"{date} {time}";
+            Data = data;
+        }
     }
 
     public class WeatherAttribute
