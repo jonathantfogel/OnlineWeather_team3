@@ -59,12 +59,13 @@ namespace OnlineWeather.Models
                     var tempDate = DateTime.Parse($"{cells[0]} {cells[1]}");
                     if (tempDate >= from)
                     {
-                        if (tempDate.Subtract(prevInterval) < timeInterval || currentIntervalData.Count() == 0)
+                        if (tempDate.Subtract(prevInterval) < timeInterval)
                         {
                             currentIntervalData.Add(double.Parse(cells[2], provider));
                         }
                         else
                         {
+                            currentIntervalData.Add(double.Parse(cells[2], provider));
                             test.Add(new WeatherItem(cells[0], cells[1], ((currentIntervalData.Count > 0) ? currentIntervalData.Average() : 0.0).ToString(provider)));
                             prevInterval = tempDate;
                             currentIntervalData.Clear();
@@ -74,31 +75,10 @@ namespace OnlineWeather.Models
                     {
                         break;
                     }
-                    //test.Add(new WeatherItem(cells[0], cells[1], cells[2]));
                 }
             }
             Data = test;
         }
-
-        public static string Serialize(DataTable dt)
-        {
-            System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-
-            foreach (DataRow row in dt.Rows)
-            {
-                Dictionary<string, object> jsRow = new Dictionary<string, object>();
-
-                foreach (DataColumn col in dt.Columns)
-                {
-                    jsRow.Add(col.ColumnName, row[col]);
-                }
-                rows.Add(jsRow);
-            }
-            return serializer.Serialize(rows);
-        }
-
-
     }
 
     public class WeatherItem

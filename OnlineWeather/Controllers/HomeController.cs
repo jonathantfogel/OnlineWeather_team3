@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using System.Xml;
 using OnlineWeather.Models;
 
 namespace OnlineWeather.Controllers
@@ -44,6 +45,35 @@ namespace OnlineWeather.Controllers
                 result.Add(dataset);
             }
             return Json(result);
+        }
+
+        [HttpPost]
+        public ActionResult RequestYrData()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load($"{Server.MapPath("~")}/Content/WeatherData/forecast_hour_by_hour.xml"); //Lokal version
+            //doc.Load("https://www.yr.no/place/Sweden/Blekinge/Karlskrona/forecast_hour_by_hour.xml");
+
+            var updateTime = doc.GetElementsByTagName("lastupdate")[0].InnerText.Replace('T', ' ');
+
+            var forecast = new List<Dictionary<string, string>>();
+            var xmlTime = doc.GetElementsByTagName("time");
+
+            for (int i = 0; i < 13; i++)
+            {
+                forecast.Add(new Dictionary<string, string>(){
+                    { "temp", xmlTime[i].SelectSingleNode("temperature").Attributes["value"].Value },
+                    { "timestamp", xmlTime[i].Attributes["from"].Value },
+                    { "description", xmlTime[i].SelectSingleNode("symbol").Attributes["name"].Value },
+                    { "windDirection", xmlTime[i].SelectSingleNode("windDirection").Attributes["deg"].Value },
+                    { "windSpeed", xmlTime[i].SelectSingleNode("windSpeed").Attributes["mps"].Value },
+                    { "precipitation", xmlTime[i].SelectSingleNode("precipitation").Attributes["value"].Value },
+                    { "airPressure", xmlTime[i].SelectSingleNode("pressure").Attributes["value"].Value }
+                });
+
+            }
+            
+            return Json(new Pair(updateTime, forecast));
         }
     }
 }

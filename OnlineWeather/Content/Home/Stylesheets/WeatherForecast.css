@@ -17,7 +17,7 @@
     width: inherit;
     font-family: Arial;
     display: grid;
-    grid-template-areas: ". . ." ". . ." "temp visual ." "forecastTimestamp forecastTimestamp forecastTimestamp" "forecastMore forecastMore forecastMore";
+    grid-template-areas: "datasource datasource datasource" ". . ." "temp visual ." "forecastTimestamp forecastTimestamp forecastTimestamp" "forecastMore forecastMore forecastMore";
     grid-template-columns: repeat(2, min-content) auto;
     grid-auto-rows: 40px 20px min-content 20px 40px;
     padding: 0 50px;
@@ -73,6 +73,20 @@
     grid-area: forecastTimestamp;
     color: rgb(180,180,180);
 }
+
+#weather_forecast-data_source {
+    grid-area: datasource;
+}
+    #weather_forecast-data_source a {
+        grid-area: datasource;
+        font-size: 14px;
+        color: rgb(220,220,220);
+        text-decoration: none;
+    }
+        #weather_forecast-data_source a:hover {
+            color: white;
+            text-decoration: underline;
+        }
 
 #weather_forecast-city {
     position: absolute;
