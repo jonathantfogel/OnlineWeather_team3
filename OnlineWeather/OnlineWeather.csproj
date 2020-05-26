@@ -180,7 +180,7 @@
     <Content Include="Content\Bootstrap\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\WeatherData\smhi-luftfuktighet.csv" />
+    <Content Include="Content\WeatherData\smhi-r.csv" />
     <Content Include="Content\WeatherData\smhi-lufttemp.csv" />
     <Content Include="Content\WeatherData\smhi-lufttryck.csv" />
     <Content Include="Content\WeatherData\smhi-molnmängd.csv" />
@@ -201,6 +201,8 @@
     <Content Include="Content\PapaParse\tests\long-sample.csv" />
     <Content Include="Content\PapaParse\tests\sample.csv" />
     <Content Include="Content\PapaParse\tests\verylong-sample.csv" />
+    <Content Include="Content\WeatherData\smhi-luftfuktighet.csv" />
+    <Content Include="Content\WeatherData\smhi-msl.csv" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

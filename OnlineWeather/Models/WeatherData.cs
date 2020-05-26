@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -11,9 +12,9 @@ namespace OnlineWeather.Models
     {
         public List<WeatherItem> Data { get; internal set; }
         private string DataType { get; }
-        private string DataAttribute { get; }
+        public string DataAttribute { get; }
 
-        public WeatherData(string dataType = "t")
+        public WeatherData(DateTime from, DateTime to, int interval, string dataType = "t")
         {
             try
             {
@@ -25,37 +26,55 @@ namespace OnlineWeather.Models
                 new KeyNotFoundException($"Weather attribute \"{dataType}\" not found.");
             }
             
-            //this.Data = new DataTable();
-            var dc = new DataColumn[4]
-            {
-                new DataColumn("Datum", typeof(string)),
-                new DataColumn("Tid", typeof(string)),
-                new DataColumn(WeatherAttribute.Attributes[dataType], typeof(string)),
-                new DataColumn("Kvalitet", typeof(string))
-            };
-            //Data.Columns.AddRange(dc);
-
             string csvData = File.ReadAllText($"{HttpContext.Current.Server.MapPath("~")}/Content/WeatherData/smhi-{dataType}.csv");
 
             var test = new List<WeatherItem>();
 
+            TimeSpan timeInterval;
+            if (interval == 1)
+            {
+                timeInterval = new TimeSpan(1, 0, 0, 0);
+            }
+            else if (interval == 2)
+            {
+                timeInterval = new TimeSpan(30, 0, 0, 0);
+            }
+            else
+            {
+                timeInterval = new TimeSpan(1, 0, 0);
+            }
+            
             var rows = csvData.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            DateTime prevInterval = new DateTime();
+            List<double> currentIntervalData = new List<double>();
+
+            var provider = CultureInfo.CreateSpecificCulture("en-GB");
+
             for (int rowidx = 1; rowidx < rows.Count(); rowidx++)
             {
                 if (!String.IsNullOrEmpty(rows[rowidx]))
                 {
-                    //Data.Rows.Add();
-                    int i = 0;
-
                     var cells = rows[rowidx].Split(';');
-
-                    test.Add(new WeatherItem(cells[0], cells[1], cells[2]));
-
-                    /*foreach (var cell in rows[rowidx].Split(';'))
+                    var tempDate = DateTime.Parse($"{cells[0]} {cells[1]}");
+                    if (tempDate >= from)
                     {
-                        Data.Rows[Data.Rows.Count - 1][i] = cell;
-                        i++;
-                    }*/
+                        if (tempDate.Subtract(prevInterval) < timeInterval || currentIntervalData.Count() == 0)
+                        {
+                            currentIntervalData.Add(double.Parse(cells[2], provider));
+                        }
+                        else
+                        {
+                            test.Add(new WeatherItem(cells[0], cells[1], ((currentIntervalData.Count > 0) ? currentIntervalData.Average() : 0.0).ToString(provider)));
+                            prevInterval = tempDate;
+                            currentIntervalData.Clear();
+                        }
+                    }
+                    if (tempDate > to)
+                    {
+                        break;
+                    }
+                    //test.Add(new WeatherItem(cells[0], cells[1], cells[2]));
                 }
             }
             Data = test;
@@ -99,7 +118,8 @@ namespace OnlineWeather.Models
         public static Dictionary<string, string> Attributes = new Dictionary<string, string>()
         {
             { "t", "Lufttemperatur" },
-            { "msl", "Lufttryck" }
+            { "msl", "Lufttryck" },
+            { "r", "Luftfuktighet" }
         };
     }
 }

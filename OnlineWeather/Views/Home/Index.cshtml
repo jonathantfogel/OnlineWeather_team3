@@ -62,13 +62,13 @@
         </div>
     </section>
     <section id="graph-filter">
-        <form method="post" id="graph-filter-form">
+        <form method="post" id="graph-filter-form" action="/Home/RequestWeatherData">
             <div class="input_wrap">
                 <label>Interval</label>
                 <select form="graph-filter-form" name="interval">
-                    <option>Timme</option>
-                    <option>Dag</option>
-                    <option>Månad</option>
+                    <option value="0">Timme</option>
+                    <option value="1">Dag</option>
+                    <option value="2">Månad</option>
                 </select>
             </div>
             <div class="input_wrap">
@@ -78,8 +78,8 @@
                     <span>Månad</span>
                     <span>Dag</span>
                     <input type="number" placeholder="yyyy" value="2020" disabled>
-                    <input type="number" placeholder="MM" min="1" max="5" name="start-interval-month">
-                    <input type="number" placeholder="dd" min="1" max="31" name="start-interval-day">
+                    <input type="number" placeholder="MM" min="1" max="5" name="start_interval_month">
+                    <input type="number" placeholder="dd" min="1" max="31" name="start_interval_day">
                 </div>
             </div>
             <div class="input_wrap">
@@ -89,32 +89,32 @@
                     <span>Månad</span>
                     <span>Dag</span>
                     <input type="number" placeholder="yyyy" value="2020" disabled>
-                    <input type="number" placeholder="MM" min="1" max="5" name="end-interval-month">
-                    <input type="number" placeholder="dd" min="1" max="31" name="end-interval-day">
+                    <input type="number" placeholder="MM" min="1" max="5" name="end_interval_month">
+                    <input type="number" placeholder="dd" min="1" max="31" name="end_interval_day">
                 </div>
             </div>
             <div class="input_wrap">
                 <label>Attribut</label>
                 <div class="inputCheck_wrap">
                     <label>
-                        <input type="checkbox" />
-                        <span>Vindhastighet</span>
-                    </label>
-                </div>
-                <div class="inputCheck_wrap">
-                    <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" name="attr_t" />
                         <span>Temperatur</span>
                     </label>
                 </div>
                 <div class="inputCheck_wrap">
                     <label>
-                        <input type="checkbox" />
-                        <span>Nederbörd</span>
+                        <input type="checkbox" name="attr_msl" />
+                        <span>Lufttryck</span>
+                    </label>
+                </div>
+                <div class="inputCheck_wrap">
+                    <label>
+                        <input type="checkbox" name="attr_r" />
+                        <span>Luftfuktighet</span>
                     </label>
                 </div>
             </div>
-            <input type="submit" value="Uppdatera" />
+            <input type="submit" id="submitFormbtn" value="Uppdatera" />
         </form>
     </section>
     <section id="graph-view">
@@ -125,7 +125,7 @@
     </section>
 </div>
 
-Scripts.Render("/Content/Api/SMHI/smhi_api.js")
+@Scripts.Render("/Content/Api/SMHI/smhi_api.js")
 @Scripts.Render("/Content/Home/Scripts/Graph.js")
 @Scripts.Render("/Content/Common/Scripts/GetWeatherData.js")
 
